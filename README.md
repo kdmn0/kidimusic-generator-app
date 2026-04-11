@@ -15,6 +15,8 @@ A Next.js web application that creates complete music tracks using the MiniMax M
 - 📱 **Mobile Friendly** - Works seamlessly on desktop and mobile
 - 💾 **Two-Column Layout** - Form on left, helpful tips on right
 
+![Uygulamadaki arayüz](./public/screenshots/app-demo.jpg)
+
 ## 🚀 Quick Start
 
 ### Prerequisites
