@@ -81,6 +81,60 @@ export default function MusicGenerator() {
 
   return (
     <div className="relative w-full px-4 py-12 md:py-20">
+      {/* Loading Screen Overlay */}
+      {loading && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <div className="glass glass-primary rounded-3xl shadow-2xl p-12 max-w-md w-full text-center backdrop-blur-xl border border-purple-500/20">
+            {/* Animated Music Notes */}
+            <div className="flex justify-center gap-2 mb-8">
+              <div className="text-4xl animate-bounce" style={{ animationDelay: '0s' }}>
+                🎵
+              </div>
+              <div className="text-4xl animate-bounce" style={{ animationDelay: '0.1s' }}>
+                🎶
+              </div>
+              <div className="text-4xl animate-bounce" style={{ animationDelay: '0.2s' }}>
+                🎵
+              </div>
+            </div>
+
+            {/* Loading Title */}
+            <h2 className="text-2xl font-bold text-white mb-2">Creating Your Music</h2>
+            <p className="text-gray-300 mb-6">AI is working its magic...</p>
+
+            {/* Progress Bar */}
+            <div className="w-full bg-slate-700/50 rounded-full h-2 mb-6 overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-full"
+                style={{
+                  width: '100%',
+                  animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                }}
+              />
+            </div>
+
+            {/* Real-time Logs */}
+            {logs.length > 0 && (
+              <div className="text-left">
+                <div className="bg-slate-800/70 rounded-lg p-4 max-h-48 overflow-y-auto mb-4 border border-blue-500/20">
+                  <div className="text-xs text-gray-300 space-y-2">
+                    {logs.slice(-5).map((log, idx) => (
+                      <div key={idx} className="flex gap-2 items-start">
+                        <span className="text-blue-400 flex-shrink-0 mt-1">✓</span>
+                        <span className="text-gray-300">{log}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Estimated Time */}
+            <p className="text-xs text-gray-400">This usually takes 30-60 seconds</p>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-6xl mx-auto">
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
