@@ -28,6 +28,11 @@ export default function MusicGenerator() {
       setError('Please enter a music style description');
       return;
     }
+    
+    if (prompt.trim().length < 10) {
+      setError('Please enter at least 10 characters for the music description');
+      return;
+    }
 
     setLoading(true);
     setError(null);
@@ -111,6 +116,16 @@ export default function MusicGenerator() {
                       {prompt.length}/300
                     </div>
                   </div>
+                  {prompt.length > 0 && prompt.length < 10 && (
+                    <p className="text-xs text-red-400 mt-2 flex items-center gap-1">
+                      ⚠️ Minimum 10 characters required ({prompt.length}/10)
+                    </p>
+                  )}
+                  {prompt.length >= 10 && (
+                    <p className="text-xs text-green-400 mt-2 flex items-center gap-1">
+                      ✅ Character limit met
+                    </p>
+                  )}
                   <p className="text-xs text-gray-400 mt-2">💡 Describe the style, mood, tempo and scene details</p>
                 </div>
 
@@ -156,9 +171,9 @@ export default function MusicGenerator() {
                 {/* Generate Button */}
                 <button
                   onClick={handleGenerate}
-                  disabled={loading || remainingSongs === 0}
+                  disabled={loading || remainingSongs === 0 || prompt.trim().length < 10}
                   className={`w-full font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 btn-glow text-white text-lg ${
-                    loading || remainingSongs === 0
+                    loading || remainingSongs === 0 || prompt.trim().length < 10
                       ? 'bg-gradient-to-r from-gray-600 to-gray-700 cursor-not-allowed opacity-60'
                       : 'bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 hover:from-purple-700 hover:via-pink-700 hover:to-red-700 shadow-lg hover:shadow-purple-500/50'
                   }`}
