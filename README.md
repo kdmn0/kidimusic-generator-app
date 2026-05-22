@@ -1,6 +1,8 @@
 # KıdıMusic ♪ Generator
 **Ankara Build Club - Sprint 2 (11.04.2025)**
 
+[🇹🇷 Türkçe Sürüm Aşağıdadır](#kıdımusic--generator-tr)
+
 A Next.js web application that creates complete music tracks using the MiniMax Music 2.6 AI model from fal.ai. Generate professional-quality music with vocals, backing music, and detailed arrangements—all from simple style descriptions and optional lyrics.
 
 ## ✨ Features
@@ -15,7 +17,16 @@ A Next.js web application that creates complete music tracks using the MiniMax M
 - 📱 **Mobile Friendly** - Works seamlessly on desktop and mobile
 - 💾 **Two-Column Layout** - Form on left, helpful tips on right
 
-![Uygulamadaki arayüz](./public/screenshots/app-demo.png)
+## 🎛️ Technology Stack
+
+| Package | Purpose |
+|---------|---------|
+| **Next.js 15+** | React framework with App Router |
+| **React 19** | UI components & hooks |
+| **TypeScript** | Type-safe development |
+| **Tailwind CSS** | Styling & responsive design |
+| **Framer Motion** | Fluid animations and scroll effects |
+| **@fal-ai/client** | MiniMax Music API integration |
 
 ## 🚀 Quick Start
 
@@ -24,7 +35,7 @@ A Next.js web application that creates complete music tracks using the MiniMax M
 - Node.js 18+ and npm
 - fal.ai API key (free account at [fal.ai](https://fal.ai))
 
-### Setup (2 minutes)
+### Setup 
 
 1. **Clone and install**:
 ```bash
@@ -35,7 +46,7 @@ npm install
 
 2. **Add API key**:
    - Get your key from [fal.ai dashboard](https://fal.ai/dashboard)
-   - Create `.env.local` file:
+   - Create `.env.local` file in the root directory:
      ```env
      NEXT_PUBLIC_FAL_KEY=your_key_here
      ```
@@ -48,48 +59,26 @@ npm run dev
 
 ## 💡 How to Use
 
-### Basic Steps
-
-1. **Describe Your Music**
-   - Style, mood, genre, tempo
-   - Example: "Lo-fi hip-hop, chill vibes, jazz chords, 85 BPM, midnight study session"
-
-2. **Choose Format**
-   - ☑️ Instrumental (no vocals)
-   - ☐ Vocal (with singing)
-
-3. **Add Lyrics** (optional, for vocal tracks)
-   - Use structure tags: [Intro], [Verse], [Chorus], [Bridge], [Outro], etc.
-   - 0-1000 characters max
-
-4. **Generate**
-   - Click "Generate Music"
-   - Wait for real-time progress updates
-   - Cost: $0.15 per generation (It changes which tool will you use!)
-
-5. **Download & Share**
-   - Play preview
-   - Download as MP3
-   - Share on social media
-
-### Example Prompts
-
-- **Pop**: "Catchy pop song, upbeat, summer vibes, dance rhythm, female vocal, 120 BPM"
-- **Ambient**: "Peaceful ambient music, soft piano, ethereal pads, relaxation, spa music"
-- **Hip-Hop**: "Modern trap beat, 808s, hi-hats, urban streets, confident vocals, 95 BPM"
-- **Cinematic**: "Epic orchestral theme, dramatic strings, powerful brass, heroic, adventure"
+1. **Describe Your Music**: Enter the style, mood, genre, and tempo.
+2. **Choose Format**: Toggle Instrumental if you do not want vocals.
+3. **Add Lyrics**: Optional for vocal tracks. Use structure tags like `[Verse]`, `[Chorus]`.
+4. **Generate**: Click the generate button and wait for the AI to compose your track.
+5. **Download**: Play the preview or download the high-quality MP3 directly.
 
 ## 📋 Project Structure
 
 ```
 minimax-music-app/
+├── public/                    # Static assets
 ├── src/
 │   ├── app/
-│   │   ├── page.tsx           # Home page
+│   │   ├── page.tsx           # Home page & landing
 │   │   ├── layout.tsx         # Root layout (dark theme)
 │   │   └── globals.css        # Global styles
 │   └── components/
-│       └── MusicGenerator.tsx  # Main component (form + tips)
+│       ├── CustomAudioPlayer.tsx # Custom UI for audio playback
+│       ├── Icons.tsx             # SVG icons
+│       └── MusicGenerator.tsx    # Main AI generator component
 ├── .env.local                 # Environment variables
 ├── package.json               # Dependencies
 ├── tailwind.config.ts         # Tailwind config
@@ -97,114 +86,98 @@ minimax-music-app/
 └── README.md                  # This file
 ```
 
-## 🎛️ Technology Stack
-
-| Package | Purpose |
-|---------|---------|
-| **Next.js 16** | React framework with App Router |
-| **React 19** | UI components & hooks |
-| **TypeScript** | Type-safe development |
-| **Tailwind CSS v4** | Styling & responsive design |
-| **@fal-ai/client** | MiniMax Music API integration |
-
-## 🔧 API Details
-
-### MiniMax Music 2.6 Endpoint
-
-**URL**: `fal-ai/minimax-music/v2.6`
-
-**Input Parameters**:
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `prompt` | string | ✅ | Music style description (10-300 chars) |
-| `lyrics` | string | ❌ | Song lyrics with structure tags |
-| `is_instrumental` | boolean | ❌ | Generate without vocals (default: false) |
-
-**Output**:
-- MP3 audio file (2-3 minutes typical length)
-- Hosted on fal.ai CDN
-
-## 💻 Development
-
-### Available Scripts
-
-```bash
-# Development server with hot reload
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
-
-# Run linter
-npm run lint
-```
-
-##  UI Customization
-
-### Color Scheme
-- **Background**: Gray-950 (nearly black)
-- **Cards**: Gray-900 with gray-800 borders
-- **Accent**: Blue-600 (buttons)
-- **Info Panel**: Blue-900 with semi-transparent styling
-
-### Modify in `MusicGenerator.tsx`:
-```tsx
-// Change button color
-className="bg-blue-600 hover:bg-blue-700"
-
-// Change background
-className="bg-gray-950"
-
-// Change text
-className="text-white"
-```
-
-## 🐛 Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| "API key not set" | Check `.env.local` has `NEXT_PUBLIC_FAL_KEY` |
-| Generation fails | Verify fal.ai account balance and API status |
-| Build errors | Run `npm install` and check Node.js version (18+) |
-| Buttons not working | Clear browser cache and refresh |
-| Audio won't download | Check browser popup blocker |
-
-## 📊 Current Features & Status
-
-- ✅ Music generation from prompts
-- ✅ Custom lyrics with structure tags  
-- ✅ Instrumental music toggle
-- ✅ Real-time progress logging
-- ✅ Audio player & download
-- ✅ Dark theme UI
-- ✅ Responsive two-column layout
-- ✅ Error handling & validation
-
-## 📝 License
-
-This project is proprietary. Rights reserved.
-
-## 🤝 Support
-
-- **Documentation**: Check README.md
-- **Issues**: Create GitHub issue
-- **API Help**: Visit [fal.ai docs](https://fal.ai/docs)
-
-## 👨‍💻 Author
-
-Created with ❤️ for AI-powered music generation
-
 ---
 
-**Questions or suggestions?** Feel free to contribute or reach out!
+<br/>
+<br/>
 
-## 📝 License
+<a id="kıdımusic--generator-tr"></a>
 
-This project is proprietary. Rights reserved.
+# KıdıMusic ♪ Generator (TR)
+**Ankara Build Club - Sprint 2 (11.04.2025)**
 
-## Contributing
+fal.ai'nin MiniMax Music 2.6 yapay zeka modelini kullanarak sıfırdan ve tam bir müzik parçası oluşturan Next.js web uygulamasıdır. Yalnızca basit bir stil açıklaması (ve isteğe bağlı sözler) girerek profesyonel kalitede vokaller, arka plan müzikleri ve detaylı aranjmanlara sahip parçalar üretebilirsiniz.
 
-Contributions are welcome! Feel free to submit issues and pull requests.
+## ✨ Özellikler
+
+- 🎵 **Tek Tıkla Müzik Üretimi** - Sadece stil açıklaması yazarak saniyeler içinde şarkı oluşturun.
+- 🎤 **Vokal ve Şarkı Sözü Desteği** - (Verse, Chorus, Bridge vb.) yapı etiketleri kullanarak kendi sözlerinizi ekleyin.
+- 🎸 **Enstrümantal Parçalar** - Vokalli veya sadece enstrümantal müzik arasında geçiş yapın.
+- 🎼 **Tam Aranjman** - Şarkı söyleme, arka plan müziği ve detaylı orkestrasyon içerir.
+- 📥 **Kolay İndirme** - Üretilen müziği yüksek kaliteli MP3 formatında indirin.
+- ⚡ **Gerçek Zamanlı İlerleme** - Şarkınız oluşturulurken işlem loglarını anlık olarak izleyin.
+- 🌙 **Koyu Tema (Dark Mode)** - Tailwind CSS ile modern ve duyarlı tasarım.
+- 📱 **Mobil Uyumluluk** - Masaüstü ve mobil cihazlarda sorunsuz çalışır.
+
+## 🎛️ Kullanılan Teknolojiler
+
+| Paket | Kullanım Amacı |
+|---------|---------|
+| **Next.js 15+** | App Router özellikli React framework'ü |
+| **React 19** | Kullanıcı arayüzü bileşenleri |
+| **TypeScript** | Tip güvenli geliştirme |
+| **Tailwind CSS** | Stil ve duyarlı tasarım |
+| **Framer Motion** | Akıcı animasyonlar ve kaydırma efektleri |
+| **@fal-ai/client** | MiniMax Music API entegrasyonu |
+
+## 🚀 Başlangıç
+
+### Gereksinimler
+
+- Node.js 18+ ve npm
+- fal.ai API anahtarı ([fal.ai](https://fal.ai) üzerinden ücretsiz hesap açabilirsiniz)
+
+### Kurulum
+
+1. **Projeyi indirin ve bağımlılıkları kurun**:
+```bash
+git clone <your-repo>
+cd minimax-music-app
+npm install
+```
+
+2. **API anahtarını ekleyin**:
+   - Anahtarınızı [fal.ai panosu](https://fal.ai/dashboard) üzerinden alın.
+   - Proje ana dizininde `.env.local` dosyası oluşturun:
+     ```env
+     NEXT_PUBLIC_FAL_KEY=sizin_api_anahtariniz
+     ```
+
+3. **Uygulamayı çalıştırın**:
+```bash
+npm run dev
+```
+   - Tarayıcınızda http://localhost:3000 adresine gidin.
+
+## 💡 Nasıl Kullanılır?
+
+1. **Müziğinizi Tarif Edin**: Stil, ruh hali, tür ve tempo bilgilerini girin.
+2. **Format Seçin**: Vokal istemiyorsanız "Instrumental" seçeneğini aktif hale getirin.
+3. **Sözleri Ekleyin**: Vokalli parçalar için isteğe bağlıdır. `[Verse]`, `[Chorus]` gibi etiketler kullanarak şarkı yapısını belirtebilirsiniz.
+4. **Üretin**: Üret butonuna tıklayın ve yapay zekanın parçanızı bestelemesini bekleyin.
+5. **İndirin**: Üretilen müziği dinleyin veya yüksek kaliteli MP3 olarak cihazınıza indirin.
+
+## 📋 Proje Yapısı
+
+```
+minimax-music-app/
+├── public/                    # Statik dosyalar
+├── src/
+│   ├── app/
+│   │   ├── page.tsx           # Ana sayfa
+│   │   ├── layout.tsx         # Kök düzen dosyası (koyu tema ayarları)
+│   │   └── globals.css        # Global CSS stilleri
+│   └── components/
+│       ├── CustomAudioPlayer.tsx # Özel ses oynatıcı bileşeni
+│       ├── Icons.tsx             # SVG ikonlar
+│       └── MusicGenerator.tsx    # Ana yapay zeka üretici bileşeni
+├── .env.local                 # Çevresel değişkenler
+├── package.json               # Proje bağımlılıkları
+├── tailwind.config.ts         # Tailwind ayarları
+├── tsconfig.json              # TypeScript ayarları
+└── README.md                  # Bu dosya
+```
+
+## 📝 Lisans
+
+Bu proje tescillidir. Tüm hakları saklıdır.
