@@ -47,6 +47,29 @@ export default function Home() {
     }
   };
 
+  const scrollToTop = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const startPosition = window.scrollY;
+    const distance = -startPosition;
+    const duration = 800;
+    let start: number | null = null;
+
+    const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+    const step = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+
+      window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  };
+
   const showcaseTracks = [
     {
       id: 'metal',
@@ -126,12 +149,15 @@ export default function Home() {
         className="fixed top-4 left-4 right-4 z-40"
       >
         <nav className="max-w-7xl mx-auto glass rounded-2xl px-6 py-4 flex items-center justify-between border border-white/5 shadow-2xl">
-          <div className="flex items-center gap-2">
+          <button 
+            onClick={scrollToTop}
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer outline-none"
+          >
             <div className="p-1.5 bg-white/10 hover:bg-white/20 transition-colors rounded-lg text-white">
               <MusicIcon size={18} />
             </div>
             <span className="font-heading text-lg tracking-wider text-white">KıdıMusic</span>
-          </div>
+          </button>
 
           <div className="hidden md:flex items-center gap-8 text-xs font-semibold text-slate-400">
             <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white transition-colors duration-200 cursor-pointer">Features</a>
@@ -466,12 +492,15 @@ export default function Home() {
         className="relative z-10 py-12 px-6 border-t border-white/5 bg-[#050505] text-silver-500 text-xs"
       >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
+          <button 
+            onClick={scrollToTop}
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer outline-none"
+          >
             <div className="p-1 bg-white/10 rounded text-white">
               <MusicIcon size={14} />
             </div>
             <span className="font-heading text-sm text-silver-300 tracking-wider">KıdıMusic</span>
-          </div>
+          </button>
 
           <div className="flex flex-wrap justify-center gap-6 text-[11px] text-slate-500">
             <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-slate-300 transition-colors">Features</a>
