@@ -31,10 +31,11 @@ export default function MusicGenerator() {
   const remainingSongs = Math.floor(balance / COST_PER_GENERATION);
 
   const stylePresets = [
-    { label: '🎵 Chill Lofi', prompt: 'Lo-fi hip-hop, chill vibes, jazz chords, 85 BPM, midnight study session, dusty vinyl crackle' },
-    { label: '🎹 Synthwave', prompt: 'Retro 80s synthwave, driving bassline, analog synthesizers, neon streets, nocturnal drive, 110 BPM' },
-    { label: '🎸 Summer Pop', prompt: 'Catchy upbeat pop, acoustic guitar, bright piano chords, energetic drums, happy summer mood, 120 BPM' },
-    { label: '🎻 Epic Orchestral', prompt: 'Cinematic orchestral theme, dramatic strings, powerful brass, heroic melody, adventure film score' }
+    { label: '🎸 Summer Pop', prompt: 'Feel-good summer pop, tropical marimba, bouncy bassline, crisp acoustic strumming, joyful and uplifting vibe, 125 BPM' },
+    { label: '🎻 Epic Orchestral', prompt: 'Grand cinematic score, staccato strings, thundering taiko drums, triumphant brass section, sweeping fantasy adventure' },
+    { label: '🥁 Heavy Metal', prompt: 'Heavy metal, distorted electric guitars, aggressive double kick drums, dark atmosphere, fast tempo, 160 BPM' },
+    { label: '🎧 Cyberpunk', prompt: 'Dark cyberpunk techno, heavy bass drops, futuristic dystopian synth, industrial beats, 130 BPM' },
+    { label: '🎷 Smooth Jazz', prompt: 'Smooth jazz lounge, sultry saxophone solos, upright bass, brushed drums, late night cafe vibe' },
   ];
 
   const lyricTags = ['[Intro]', '[Verse 1]', '[Chorus]', '[Verse 2]', '[Bridge]', '[Outro]', '[Guitar Solo]'];
@@ -223,11 +224,10 @@ export default function MusicGenerator() {
                           key={idx}
                           type="button"
                           onClick={() => handlePresetSelect(preset.prompt)}
-                          className={`text-xs px-3 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer ${
-                            prompt === preset.prompt
+                          className={`text-xs px-3 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer ${prompt === preset.prompt
                               ? 'bg-white/10 border-white text-white shadow-[0_0_10px_rgba(255,255,255,0.2)]'
                               : 'bg-transparent border-white/10 text-silver-400 hover:text-white hover:border-white/30'
-                          }`}
+                            }`}
                         >
                           {preset.label}
                         </button>
@@ -251,14 +251,12 @@ export default function MusicGenerator() {
                   <button
                     type="button"
                     onClick={() => setIsInstrumental(!isInstrumental)}
-                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out outline-none ${
-                      isInstrumental ? 'bg-white' : 'bg-white/20'
-                    }`}
+                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out outline-none ${isInstrumental ? 'bg-white' : 'bg-white/20'
+                      }`}
                   >
                     <span
-                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                        isInstrumental ? 'translate-x-5' : 'translate-x-0'
-                      }`}
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${isInstrumental ? 'translate-x-5' : 'translate-x-0'
+                        }`}
                     />
                   </button>
                 </div>
@@ -309,11 +307,10 @@ export default function MusicGenerator() {
                   type="button"
                   onClick={handleGenerate}
                   disabled={loading || remainingSongs === 0 || prompt.trim().length < 10}
-                  className={`w-full font-heading font-semibold tracking-wider py-4 px-6 rounded-xl transition-all duration-350 cursor-pointer flex items-center justify-center gap-2.5 text-md shadow-xl ${
-                    loading || remainingSongs === 0 || prompt.trim().length < 10
+                  className={`w-full font-heading font-semibold tracking-wider py-4 px-6 rounded-xl transition-all duration-350 cursor-pointer flex items-center justify-center gap-2.5 text-md shadow-xl ${loading || remainingSongs === 0 || prompt.trim().length < 10
                       ? 'bg-black border border-white/10 text-silver-500 cursor-not-allowed shadow-none'
                       : 'bg-white text-black hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.3)] active:scale-[0.98]'
-                  }`}
+                    }`}
                 >
                   <SparklesIcon size={18} className={loading ? 'animate-spin' : ''} />
                   {loading ? 'AI Studio Generating...' : remainingSongs === 0 ? 'Balance Exhausted' : 'Generate AI Track'}

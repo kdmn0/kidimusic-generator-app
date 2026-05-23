@@ -169,7 +169,7 @@ export default function CustomAudioPlayer({ src }: CustomAudioPlayerProps) {
           </div>
 
           {/* Volume Control */}
-          <div className="flex items-center gap-2 w-full md:w-32 flex-shrink-0">
+          <div className="flex items-center gap-2 w-16 md:w-20 flex-shrink-0">
             <button onClick={toggleMute} className="text-gray-400 hover:text-white transition-colors cursor-pointer">
               <Volume2Icon size={18} className={isMuted ? 'text-red-400 opacity-60' : 'text-gray-300'} />
             </button>
