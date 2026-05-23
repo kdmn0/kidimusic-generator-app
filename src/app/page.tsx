@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants } from 'motion/react';
 import MusicGenerator from '@/components/MusicGenerator';
 import CustomAudioPlayer from '@/components/CustomAudioPlayer';
 import {
